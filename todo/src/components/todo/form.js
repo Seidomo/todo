@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 
-export default function TodoForm (props){
+import useForm from '../hooks/useForm';
+
+export default function TodoForm ({handleInSubmit}){
 // class TodoForm extends React.Component {
 
   // constructor(props) {
   //   super(props);
   //   this.state = { item: {} };
   // }
-
-  const [item, setItem] = useState([])
  
-  function handleInputChange (e) {
-    setItem( {...item, [e.target.name]: e.target.value } );
-  };
+  const [values, handleInputChange, handleSubmit] = useForm(handleInSubmit);
 
-   function handleSubmit (e) {
-    e.preventDefault();
-    e.target.reset();
-    props.handleSubmit(item);
-    const items = {};
-    setItem(items);
-  };
+  // const [item, setItem] = useState([])
+ 
+  // function handleInputChange (e) {
+  //   setItem( {...item, [e.target.name]: e.target.value } );
+  // };
+
+  //  function handleSubmit (e) {
+  //   e.preventDefault();
+  //   e.target.reset();
+  //   props.handleSubmit(item);
+  //   const items = {};
+  //   setItem(items);
+  // };
 
   // render() {
     return (

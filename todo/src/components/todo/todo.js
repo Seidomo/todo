@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+import axios from 'axios'
+import Todo from './todo-connected.js'
 
 import './todo.scss';
 
@@ -14,8 +16,32 @@ export default function ToDo (){
   //     list: [],
   //   };
   // }
-  
+   const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
   const [list, setList] = useState([])
+
+
+  const getItem = async () => {
+    try{
+      let request = await axios({
+        method: 'get',
+        url: todoAPI
+      })
+
+      let data = request.data.rseults;
+      setList(data);
+    }catch(e){console.warn(e.message)};
+  }
+
+  useEffect(() =>{
+    getItem()
+  }, []);
+
+
+  // const postItem = async (input) =>{
+  //   try{
+
+  //   }
+  // }
 
  const addItem = (item) => {
     item._id = Math.random();
@@ -71,7 +97,7 @@ export default function ToDo (){
         <section className="todo">
 
           <div>
-            <TodoForm handleSubmit={addItem} />
+            <TodoForm handleInSubmit={addItem} />
           </div>
 
           <div>
