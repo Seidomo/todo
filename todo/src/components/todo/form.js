@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function TodoForm (props){
 // class TodoForm extends React.Component {
@@ -8,18 +8,18 @@ export default function TodoForm (props){
   //   this.state = { item: {} };
   // }
 
-  const [items, setItems] = useState([])
+  const [item, setItem] = useState([])
  
   function handleInputChange (e) {
-    setItems({ item: {...items.item, [e.target.name]: e.target.value } });
+    setItem( {...item, [e.target.name]: e.target.value } );
   };
 
    function handleSubmit (e) {
     e.preventDefault();
     e.target.reset();
-    props.handleSubmit(items.item);
-    const item = {};
-    setItems({item});
+    props.handleSubmit(item);
+    const items = {};
+    setItem(items);
   };
 
   // render() {
