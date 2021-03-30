@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import useForm from '../hooks/useForm';
 
-export default function TodoForm ({handleInSubmit}){
+export default function TodoForm ({addItem}){
 // class TodoForm extends React.Component {
 
   // constructor(props) {
@@ -10,7 +10,7 @@ export default function TodoForm ({handleInSubmit}){
   //   this.state = { item: {} };
   // }
  
-  const [values, handleInputChange, handleSubmit] = useForm(handleInSubmit);
+  const [values, handleInputChange, handleSubmit] = useForm(addItem);
 
   // const [item, setItem] = useState([])
  
