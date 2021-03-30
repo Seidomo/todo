@@ -3,17 +3,17 @@ import React from 'react';
 
 
 
-export default function toDoList ({list, setList}){
+export default function toDoList (props){
 
   
     return (
       <ul>
-        {list.map(item => (
+        {props.list.map(item => (
           <li
             className={`complete-${item.complete.toString()}`}
             key={item._id}
           >
-            <span onClick={() =>list.handleComplete(item._id)}>
+            <span onClick={() =>props.handleComplete(item._id)}>
               {item.text}
             </span>
           </li>
