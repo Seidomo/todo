@@ -1,19 +1,19 @@
 import React from 'react';
-import ToDo from './todo.js';
+// import ToDo from './todo.js';
 
 
 
-export default function toDoList ({lists, setLists}){
+export default function toDoList ({list, setList}){
 
   
     return (
       <ul>
-        {lists.list.map(item => (
+        {list.map(item => (
           <li
             className={`complete-${item.complete.toString()}`}
             key={item._id}
           >
-            <span onClick={() =>lists.handleComplete(item._id)}>
+            <span onClick={() =>list.handleComplete(item._id)}>
               {item.text}
             </span>
           </li>
