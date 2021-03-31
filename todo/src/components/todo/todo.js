@@ -2,64 +2,88 @@ import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import axios from 'axios'
-import Todo from './todo-connected.js'
-
 import './todo.scss';
 
+
+const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 export default function ToDo (){
 
-// class ToDo extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     list: [],
-  //   };
-  // }
-   const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
+  
   const [list, setList] = useState([])
 
 
-  const getItem = async () => {
-    try{
+  const getItems = async () => {
+    
       let request = await axios({
         method: 'get',
         url: todoAPI
       })
 
-      let data = request.data.rseults;
+      let data = request.data.results;
       setList(data);
-    }catch(e){console.warn(e.message)};
+   
   }
 
   useEffect(() =>{
-    getItem()
+    getItems()
   }, []);
 
-
-  // const postItem = async (input) =>{
-  //   try{
-
-  //   }
-  // }
-
- const addItem = (item) => {
-    item._id = Math.random();
-    item.complete = false;
-    setList([...list, item]);
+  const postItems = async (input) => {
+    let request = await axios({
+      method: 'post',
+      url: todoAPI,
+      data: input
+    })
+    getItems();
+    console.log(request);
+    return request;
   };
 
-  const toggleComplete = id =>{
+  const putItems = async (id) => {
 
-    let item = list.filter(i => i._id === id)[0] || {};
-
-    if (item._id) {
-      item.complete = !item.complete;
-      let lists = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList({lists});
+    let itemToPut = list.filter(i => i._id === id)[0];
+    
+    if (itemToPut._id) {
+      let request = await axios({
+        method: 'put',
+        url: `${todoAPI}/${id}`,
+        data: {complete: !itemToPut.complete},
+      })
+      getItems();
+      return request;
     }
+  }
 
-  };
+  const deleteItems = async (id) => {
+
+    let request = await axios({
+      method: 'delete',
+      url: `${todoAPI}/${id}`,
+    })
+    getItems();
+    return request;
+  }
+
+  
+
+//  const addItem = (item) => {
+//     item._id = Math.random();
+//     item.complete = false;
+//     setList([...list, item]);
+//   };
+
+//   const toggleComplete = id =>{
+
+//     let item = list.filter(i => i._id === id)[0] || {};
+
+//     if (item._id) {
+//       item.complete = !item.complete;
+//       let lists = list.map(listItem => listItem._id === item._id ? item : listItem);
+//       setList({lists});
+//     }
+
+//   };
 
   // function componentDidMount (){
   //   let list = [
@@ -97,13 +121,14 @@ export default function ToDo (){
         <section className="todo">
 
           <div>
-            <TodoForm handleInSubmit={addItem} />
+            <TodoForm addItem={postItems} />
           </div>
 
           <div>
             <TodoList
               list={list}
-              handleComplete={toggleComplete}
+              handleComplete={putItems}
+              handleDelete={deleteItems}
             />
           </div>
         </section>
