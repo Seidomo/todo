@@ -10,7 +10,7 @@ const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 export default function ToDo (){
 
 
-  const [request, response] = useAjax();
+  const [request, response] = useAjax([]);
   const [list, setList] = useState([])
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function ToDo (){
 //     }else{
 //       setList(response);
 //     }
-  
+//  setList(response);
   }, [response]);
 
 

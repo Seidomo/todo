@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Button, Form } from 'react-bootstrap';
 import useForm from '../hooks/useForm';
 
 export default function TodoForm ({addItem}){
@@ -30,25 +30,25 @@ export default function TodoForm ({addItem}){
     return (
       <>
         <h3>Add Item</h3>
-        <form onSubmit={handleSubmit}>
-          <label>
+        <Form onSubmit={handleSubmit}>
+          <Form.Label>
             <span>To Do Item</span>
             <input
               name="text"
               placeholder="Add To Do List Item"
               onChange={handleInputChange}
             />
-          </label>
-          <label>
+          </Form.Label>
+          <Form.Label>
             <span>Difficulty Rating</span>
             <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
-          </label>
-          <label>
+          </Form.Label>
+          <Form.Label>
             <span>Assigned To</span>
             <input type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} />
-          </label>
-          <button>Add Item</button>
-        </form>
+          </Form.Label>
+          <Button variant="primary" type="submit">Add Item</Button>
+        </Form>
       </>
     );
   }
