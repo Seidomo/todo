@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import axios from 'axios'
+import useAjax from '../hooks/useAjax'
 import './todo.scss';
 
 
@@ -9,8 +10,16 @@ const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 export default function ToDo (){
 
 
-  
+  const [request, response] = useAjax();
   const [list, setList] = useState([])
+
+  // useEffect(() => {
+  //   request({ todoAPI });
+  // }, [request]);
+
+  useEffect(() => {
+  setList(response);
+  }, [response]);
 
 
   const getItems = async () => {
@@ -33,10 +42,10 @@ export default function ToDo (){
     let request = await axios({
       method: 'post',
       url: todoAPI,
+      headers: { 'Content-Type': 'application/json' },
       data: input
     })
     getItems();
-    console.log(request);
     return request;
   };
 
@@ -48,6 +57,7 @@ export default function ToDo (){
       let request = await axios({
         method: 'put',
         url: `${todoAPI}/${id}`,
+        headers: { 'Content-Type': 'application/json' },
         data: {complete: !itemToPut.complete},
       })
       getItems();
@@ -59,6 +69,8 @@ export default function ToDo (){
 
     let request = await axios({
       method: 'delete',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
       url: `${todoAPI}/${id}`,
     })
     getItems();
