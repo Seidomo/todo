@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const useAjax = () => {
 
-  const [options, request] = useState({});
+  const [options, request] = useState([]);
   const [response, setResponse] = useState({});
 
   useEffect(() => {

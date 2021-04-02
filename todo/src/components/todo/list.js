@@ -1,4 +1,5 @@
 import React from 'react';
+import { SettingsContext } from '../context/settings.js';
 // import ToDo from './todo.js';
 
 
