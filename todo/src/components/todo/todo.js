@@ -13,12 +13,20 @@ export default function ToDo (){
   const [request, response] = useAjax();
   const [list, setList] = useState([])
 
-  // useEffect(() => {
-  //   request({ todoAPI });
-  // }, [request]);
-
   useEffect(() => {
-  setList(response);
+    request({ url: todoAPI });
+  }, [request]);
+
+ 
+  
+  useEffect(() => {
+    console.log(response);
+//     if(!response){
+// setList();
+//     }else{
+//       setList(response);
+//     }
+  
   }, [response]);
 
 
