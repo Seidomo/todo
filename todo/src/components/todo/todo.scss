@@ -76,13 +76,13 @@ body, html {
                  border: .5px solid #eee;
                  display:inline-block;
                  padding: .2em .25em;
-                 width: 300px;
+                 width: 500px;
              }
 
             button {
                 background: transparent;
                 border:none;
-                color:blue;
+                color:rgb(69, 69, 71);
                 cursor:pointer;
                 padding:0;
                 margin: 0 .75em;
@@ -91,4 +91,48 @@ body, html {
         }
     }
 
+}
+
+.nav-two {
+    display: flex;
+    color: rgb(255, 255, 255);
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 20px;
+}
+
+.login {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    padding: 20px;
+    margin-left: 700px;
+}
+
+.nav-bar {
+    margin-right: 55vw;
+  
+}
+
+#list {
+    margin-bottom: 10px;
+    
+}
+
+.blockquote-footer {
+    text-align: right;
+}
+
+
+
+.exit-button {
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+    text-align: right;
+    background-color: rgb(134, 134, 133);
+}
+
+.mr-auto {
+    padding: 10px;
 }
