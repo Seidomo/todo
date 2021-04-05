@@ -4,6 +4,13 @@ import TodoList from './list.js';
 import axios from 'axios'
 import useAjax from '../hooks/useAjax'
 import './todo.scss';
+import NavBar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 
 
 const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
@@ -110,18 +117,41 @@ export default function ToDo (){
   return (
       <>
         <header>
-          <h2>
-          There are {list.filter(item => !item.complete).length} Items To Complete
-          </h2>
+          
+          <NavBar bg="primary" variant="dark">
+          <Nav>
+            <Nav.Link href="">Home</Nav.Link>
+          </Nav>
+          <Form className= "login">
+            <InputGroup>
+              <FormControl
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+          </Form>
+          <Form inline >
+            <FormControl type="text" placeholder="Password" className="mr-sm-2" />
+            <Button variant="dark" type="submit">Login</Button>
+          </Form>
+        </NavBar>
+        <NavBar bg="dark"  className="nav-two">
+          <Nav>
+            <h2>
+              To Do List Manager ({list.filter(item => !item.complete).length}) Items To  Be Completed
+            </h2>
+          </Nav>
+        </NavBar>
         </header>
-
+         
         <section className="todo">
 
           <div>
             <TodoForm addItem={postItems} />
           </div>
 
-          <div>
+          <div className="todo">
             <TodoList
               list={list}
               handleComplete={putItems}
